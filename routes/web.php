@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\PageController as DashboardPageController;
+use App\Http\Controllers\Pages\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('dashboard')->name('dashboard')->group(function() {
+    Route::middleware(['auth'])->group(function() {
+        Route::get('/', function() {
+            return view('dashboard');
+        })->name('.index');
+
+        Route::get('/pages', [DashboardPageController::class, 'index'])->name('.pages');
+
+        Route::get('/pages/edit/{page}', [DashboardPageController::class, 'edit'])->name('.pages.edit');
+        Route::post('/pages/edit/{page}', [DashboardPageController::class, 'postEdit'])->name('.pages.edit');
+
+        Route::get('/pages/edit/{page}/{language}', [DashboardPageController::class, 'editContent'])->name('.pages.editContent');
+        Route::post('/pages/edit/{page}/{language}', [DashboardPageController::class, 'postEditContent'])->name('.pages.editContent');
+    });
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/{locale?}', [PageController::class, 'view'])->name('pages.home');
+Route::get('/{locale}/{page}', [PageController::class, 'view'])->name('pages.page');
 
 require __DIR__.'/auth.php';
