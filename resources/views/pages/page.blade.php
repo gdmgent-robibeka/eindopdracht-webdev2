@@ -1,10 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>{{ $content->title }}</h1>
 
-    <main>
-        {!! $content->content !!}
-    </main>
+    <div class="container">
+        <h1 class="display-1 mt-3">{{ $content->title }}</h1>
+        <main>
+            {!! $content->content !!}
+        </main>
+    </div>
 @endsection
 
