@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\PageController as DashboardPageController;
+use App\Http\Controllers\Pages\Contact\ContactController;
 use App\Http\Controllers\Pages\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,5 +38,7 @@ Route::prefix('dashboard')->name('dashboard')->group(function() {
 
 Route::get('/{locale?}', [PageController::class, 'view'])->name('pages.home');
 Route::get('/{locale}/{page}', [PageController::class, 'view'])->name('pages.page');
+
+Route::post('/nl/contact', [ContactController::class, 'sendMail'])->name('pages.contact');
 
 require __DIR__.'/auth.php';
