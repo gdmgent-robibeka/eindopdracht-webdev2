@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\PageContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 
 class PageController extends Controller
@@ -12,6 +13,7 @@ class PageController extends Controller
     public function view($locale = null, $page = null) {
         // Define default locale
         if(!$locale) $locale = Config::get('app.locale');
+        App::setLocale($locale);
 
         // Define default page (=home)
         if(!$page) {
