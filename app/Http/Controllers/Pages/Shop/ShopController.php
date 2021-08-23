@@ -26,6 +26,7 @@ class ShopController extends Controller
             'locale' => $locale,
             'productContent' => $productContent,
             'product' => $productContent->product,
+            'cart' => $shoppingCart,
         ]);
     }
 
@@ -33,13 +34,19 @@ class ShopController extends Controller
         if(!$locale) $locale = Config::get('app.locale');
         App::setLocale($locale);
 
+        $request->validate([
+            'quantity' => 'required',
+        ]);
+
         $product = Product::findOrFail($request->product_id);
         $cart->add([
             'id' => $product->id,
             'quantity' => $request->quantity,
-            'name' => $request->name,
-            'price' => $request->price,
+            'name' => $product->name,
+            'price' => $product->price,
             'model' => $product,
         ]);
+
+        return redirect()->back();
     }
 }

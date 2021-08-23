@@ -19,4 +19,8 @@ class Cart
     public function get() {
         return session('shopping_cart', new CartCollection());
     }
+
+    public function clear() {
+        session()->forget('shopping_cart');
+    }
 }

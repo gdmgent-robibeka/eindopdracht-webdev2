@@ -3,7 +3,7 @@
         <nav>
             @foreach ($pages as $page)
                 <a href="{{ route('pages.page', [$locale, $page->slug]) }}"
-                    class="text-white text-decoration-none mr-2 @if(request()->is('*/' . $page->slug . '')) fw-bold @endif">
+                    class="text-white text-decoration-none mr-2 @if(request()->is('*/' . $page->slug . '*')) fw-bold @endif">
                     {{ $page->title }}
                 </a>
             @endforeach

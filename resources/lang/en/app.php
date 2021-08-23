@@ -2,6 +2,7 @@
 
 return [
     'add_to_cart' => 'Add to cart',
+    'cart' => 'Cart',
     'form' => [
         'content' => 'Content',
         'email' => 'Email',
