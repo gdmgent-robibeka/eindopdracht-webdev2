@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\NewsItemContent;
 use App\Models\PageContent;
 use App\Models\ProductContent;
 use Illuminate\Support\Facades\App;
@@ -26,12 +27,14 @@ class PageController extends Controller
         if(!$pageContent) abort(404);
 
         $productContents = ProductContent::where('language', $locale)->get();
+        $newsContents = NewsItemContent::where('language', $locale)->simplePaginate(5);
 
         return view('pages.page', [
             'locale' => $locale,
             'content' => $pageContent,
             'pages' => PageContent::where('language', $locale)->get(),
             'productContents' => $productContents,
+            'newsContents' => $newsContents,
         ]);
     }
 }

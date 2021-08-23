@@ -11,7 +11,10 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "mollie/laravel-mollie": "^2.0"
+        "mailchimp/mailchimp": "^2.0",
+        "mailchimp/marketing": "^3.0",
+        "mollie/laravel-mollie": "^2.0",
+        "spatie/laravel-newsletter": "^4.10"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -24,4 +24,6 @@ return [
     'order_status' => 'Bestelling heeft status',
     'order_succes' => 'Bestelling geslaagd',
     'pay' => 'Afrekenen',
+    'send' => 'Verzenden',
+    'sign_up' => 'Meld je aan voor onze nieuwsbrief',
 ];

@@ -15,5 +15,9 @@
         @include('pages.shop.index')
     @endif
 
+    @if (request()->is('*/news') || request()->is('*/nieuws'))
+        @include('pages.news.index')
+    @endif
+
 @endsection
 

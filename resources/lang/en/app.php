@@ -24,4 +24,6 @@ return [
     'order_status' => 'Order has status',
     'order_success' => 'Order succeeded',
     'pay' => 'Pay',
+    'send' => 'Send',
+    'sign_up' => 'Sign up for our newsletter',
 ];

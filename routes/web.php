@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\PageController as DashboardPageController;
 use App\Http\Controllers\Dashboard\Shop\ShopController as DashboardShopController;
 use App\Http\Controllers\Pages\Contact\ContactController;
+use App\Http\Controllers\Pages\News\NewsController;
 use App\Http\Controllers\Pages\PageController;
 use App\Http\Controllers\Pages\Shop\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ Route::get('/register', function() {
     return view('register');
 });
 
+// Admin dashboard routes
 Route::middleware(['auth'])->group(function() {
     Route::prefix('dashboard')->name('dashboard')->group(function() {
         Route::get('/', function() {
@@ -47,11 +49,21 @@ Route::middleware(['auth'])->group(function() {
     });
 });
 
+// News routes
+Route::get('/{locale}/news/{slug}', [NewsController::class, 'index'])->name('pages.news');
+Route::get('/{locale}/newsletter', [NewsController::class, 'signUp'])->name('newsletter.index');
+Route::post('/newsletter', [NewsController::class, 'storeSignUp'])->name('newsletter');
+
+// Standard page routes
 Route::get('/{locale?}', [PageController::class, 'view'])->name('pages.home');
 Route::get('/{locale}/{page}', [PageController::class, 'view'])->name('pages.page');
 
-Route::post('/nl/contact', [ContactController::class, 'sendMail'])->name('pages.contact');
+// Contact mail routes
+Route::post('/contact', [ContactController::class, 'sendMail'])->name('pages.contact');
 
+
+
+// Shop routes
 Route::prefix('/{locale}/shop')->name('shop')->group(function() {
     Route::get('/order', [ShopController::class, 'viewForm'])->name('.order');
     Route::post('/order', [ShopController::class, 'order'])->name('.order');
