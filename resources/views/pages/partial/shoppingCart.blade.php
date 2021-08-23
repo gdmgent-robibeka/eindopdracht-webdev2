@@ -1,4 +1,4 @@
-<div class="mt-3">
+<div class="mt-3 border p-4 rounded-3 bg-light bg-gradient">
     <h2 class="h3">@lang('app.cart')</h2>
 
     <table class="table w-50">
@@ -19,4 +19,10 @@
             </tr>
         </tbody>
     </table>
+
+    @if (!$finalize)
+        <a href="{{ route('shop.order', $locale) }}" class="btn btn-success">
+            @lang('app.pay')
+        </a>
+    @endif
 </div>

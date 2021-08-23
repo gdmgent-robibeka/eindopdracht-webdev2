@@ -3,11 +3,13 @@
 {{-- {{ dd($product) }} --}}
 @section('content')
     @if ($cart->hasItems())
-        @include('pages.partial.shoppingCart')
+        @include('pages.partial.shoppingCart', [
+            'finalize' => false,
+        ])
     @endif
 
     <h1 class="display-1 pt-3">{{ $productContent->name }}</h1>
-    <p>€ {{ number_format(($product->price / 100), 2, ',', '.') }}</p>
+    <p class="h4">€ {{ number_format(($product->price / 100), 2, ',', '.') }}</p>
 
     <main>
         {!! $productContent->description !!}

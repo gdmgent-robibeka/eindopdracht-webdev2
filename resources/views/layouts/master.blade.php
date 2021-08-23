@@ -25,8 +25,9 @@
         <link rel="stylesheet" href="{{ asset('css/app.scss') }}">
     </head>
     <body class="antialiased bg-light">
-
-        @include('components.header')
+        @if (!request()->is('*/order*'))
+            @include('components.header')
+        @endif
 
         <div class="container">
             @yield('content')

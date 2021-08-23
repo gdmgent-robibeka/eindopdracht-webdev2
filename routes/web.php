@@ -52,11 +52,16 @@ Route::get('/{locale}/{page}', [PageController::class, 'view'])->name('pages.pag
 
 Route::post('/nl/contact', [ContactController::class, 'sendMail'])->name('pages.contact');
 
-Route::get('/{locale}/shop/{slug}', [ShopController::class, 'index'])->name('shop.product');
-Route::post('/{locale}/shop/cart', [ShopController::class, 'addToCart'])->name('shop.cart');
+Route::prefix('/{locale}/shop')->name('shop')->group(function() {
+    Route::get('/order', [ShopController::class, 'viewForm'])->name('.order');
+    Route::post('/order', [ShopController::class, 'order'])->name('.order');
 
-// Route::get('/{locale}/shop/slug', function() {
-//     return 'Test';
-// });
+    Route::get('/order/{order}', [ShopController::class, 'getOrder'])->name('.order.status');
+
+    Route::get('/{slug}', [ShopController::class, 'index'])->name('.product');
+    Route::post('/cart', [ShopController::class, 'addToCart'])->name('.cart');
+});
+
+Route::post('/webhooks/mollie', [ShopController::class, 'webhook'])->name('webhooks.mollie');
 
 require __DIR__.'/auth.php';
