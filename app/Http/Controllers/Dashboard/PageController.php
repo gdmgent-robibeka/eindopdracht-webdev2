@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PageContentRequest;
+use App\Http\Requests\PageRequest;
 use App\Models\Page;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class PageController extends Controller
@@ -23,7 +24,7 @@ class PageController extends Controller
         ]);
     }
 
-    public function postEdit(Page $page, Request $request) {
+    public function postEdit(Page $page, PageRequest $request) {
         $page->title = $request->title;
         $page->slug = Str::slug($request->title);
         $page->save();
@@ -41,7 +42,7 @@ class PageController extends Controller
         ]);
     }
 
-    public function postEditContent(Page $page, $language, Request $request) {
+    public function postEditContent(Page $page, $language, PageContentRequest $request) {
         $content = $page->content()->where('language', $language)->first();
 
         $content->title = $request->title;
