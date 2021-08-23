@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Dashboard\PageController as DashboardPageController;
+use App\Http\Controllers\Dashboard\Shop\ShopController as DashboardShopController;
 use App\Http\Controllers\Pages\Contact\ContactController;
 use App\Http\Controllers\Pages\PageController;
+use App\Http\Controllers\Pages\Shop\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,13 +31,19 @@ Route::middleware(['auth'])->group(function() {
             return view('dashboard');
         })->name('.index');
 
-        Route::get('/pages', [DashboardPageController::class, 'index'])->name('.pages');
+        Route::prefix('/pages')->name('.pages')->group(function() {
+            Route::get('/', [DashboardPageController::class, 'index']);
 
-        Route::get('/pages/edit/{page}', [DashboardPageController::class, 'edit'])->name('.pages.edit');
-        Route::post('/pages/edit/{page}', [DashboardPageController::class, 'postEdit'])->name('.pages.edit');
+            Route::get('/edit/{page}', [DashboardPageController::class, 'edit'])->name('.edit');
+            Route::post('/edit/{page}', [DashboardPageController::class, 'postEdit'])->name('.edit');
 
-        Route::get('/pages/edit/{page}/{language}', [DashboardPageController::class, 'editContent'])->name('.pages.editContent');
-        Route::post('/pages/edit/{page}/{language}', [DashboardPageController::class, 'postEditContent'])->name('.pages.editContent');
+            Route::get('/edit/{page}/{language}', [DashboardPageController::class, 'editContent'])->name('.editContent');
+            Route::post('/edit/{page}/{language}', [DashboardPageController::class, 'postEditContent'])->name('.editContent');
+        });
+
+        Route::prefix('/shop')->name('.shop')->group(function() {
+            Route::get('/', [DashboardShopController::class, 'index']);
+        });
     });
 });
 
@@ -43,5 +51,12 @@ Route::get('/{locale?}', [PageController::class, 'view'])->name('pages.home');
 Route::get('/{locale}/{page}', [PageController::class, 'view'])->name('pages.page');
 
 Route::post('/nl/contact', [ContactController::class, 'sendMail'])->name('pages.contact');
+
+Route::get('/{locale}/shop/{slug}', [ShopController::class, 'index'])->name('shop.product');
+Route::post('/{locale}/shop/cart', [ShopController::class, 'addToCart'])->name('shop.cart');
+
+// Route::get('/{locale}/shop/slug', function() {
+//     return 'Test';
+// });
 
 require __DIR__.'/auth.php';

@@ -1,10 +1,13 @@
 <?php
 
 return [
+    'add_to_cart' => 'Voeg toe aan winkelmandje',
     'form' => [
-        'name' => 'Naam',
-        'email' => 'E-mailadres',
-        'subject' => 'Onderwerp',
         'content' => 'Inhoud',
+        'email' => 'E-mailadres',
+        'name' => 'Naam',
+        'quantity' => 'Hoeveelheid',
+        'subject' => 'Onderwerp',
     ],
+    'more' => 'Meer info',
 ];

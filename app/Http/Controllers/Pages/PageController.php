@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Models\PageContent;
+use App\Models\Product;
+use App\Models\ProductContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
@@ -25,10 +27,13 @@ class PageController extends Controller
         // Page not found
         if(!$pageContent) abort(404);
 
+        $productContents = ProductContent::where('language', $locale)->get();
+
         return view('pages.page', [
             'locale' => $locale,
             'content' => $pageContent,
             'pages' => PageContent::where('language', $locale)->get(),
+            'productContents' => $productContents,
         ]);
     }
 }
