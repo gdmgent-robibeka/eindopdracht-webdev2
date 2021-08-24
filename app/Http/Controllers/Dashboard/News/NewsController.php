@@ -24,6 +24,10 @@ class NewsController extends Controller
     }
 
     public function postEdit(NewsItem $newsItem, Request $request) {
+        $request->validate([
+            'title' => 'required|max:255',
+            'slug' => 'max:255',
+        ]);
         $newsItem->title = $request->title;
         $newsItem->slug = Str::slug($request->title);
         $newsItem->save();
@@ -45,7 +49,7 @@ class NewsController extends Controller
         $content = $newsItem->content()->where('language', $language)->first();
 
         $request->validate([
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
             'slug' => 'max:255',
             'content' => 'required',
             'intro' => 'required',
@@ -53,7 +57,7 @@ class NewsController extends Controller
 
         $content->title = $request->title;
         $content->content = $request->content;
-        $content->intro = $request->content;
+        $content->intro = $request->intro;
         $content->slug = Str::slug($request->title);
         $content->save();
 
