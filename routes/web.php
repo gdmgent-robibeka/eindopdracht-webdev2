@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\PageController as DashboardPageController;
 use App\Http\Controllers\Dashboard\Shop\ShopController as DashboardShopController;
+use App\Http\Controllers\Dashboard\News\NewsController as DashboardNewsController;
 use App\Http\Controllers\Pages\Contact\ContactController;
 use App\Http\Controllers\Pages\News\NewsController;
 use App\Http\Controllers\Pages\PageController;
@@ -51,6 +52,16 @@ Route::middleware(['auth'])->group(function() {
 
             Route::get('/edit/{product}/{language}', [DashboardShopController::class, 'editContent'])->name('.editContent');
             Route::post('/edit/{product}/{language}', [DashboardShopController::class, 'postEditContent'])->name('.editContent');
+        });
+
+        Route::prefix('/news')->name('.news')->group(function() {
+            Route::get('/', [DashboardNewsController::class, 'index']);
+
+            Route::get('/edit/{newsItem}', [DashboardNewsController::class, 'edit'])->name('.edit');
+            Route::post('/edit/{newsItem}', [DashboardNewsController::class, 'postEdit'])->name('.edit');
+
+            Route::get('/edit/{newsItem}/{language}', [DashboardNewsController::class, 'editContent'])->name('.editContent');
+            Route::post('/edit/{newsItem}/{language}', [DashboardNewsController::class, 'postEditContent'])->name('.editContent');
         });
     });
 });

@@ -24,7 +24,7 @@ class ShopController extends Controller
         ]);
     }
 
-    public function postEdit(Product $product, Request $request) {
+    public function postEdit(Product $product, ProductRequest $request) {
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
         $product->price = $request->price;
