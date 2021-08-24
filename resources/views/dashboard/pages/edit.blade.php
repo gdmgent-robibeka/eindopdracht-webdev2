@@ -7,7 +7,10 @@
 
     <div class="py-12">
 
-        @include('dashboard.pages.partial.content-nav')
+        @include('dashboard.pages.partial.content-nav', [
+            'item' => $page,
+            'route' => 'pages',
+        ])
 
         <div class="max-w-7xl mx-auto p-6">
             <div class="bg-white shadow-sm sm:rounded-lg p-10">

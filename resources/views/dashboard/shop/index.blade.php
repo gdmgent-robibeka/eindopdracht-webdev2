@@ -13,6 +13,7 @@
                     <tr>
                         <th class="px-4 py-2">ID</th>
                         <th class="px-4 py-2">Product</th>
+                        <th class="px-4 py-2">Price</th>
                         <th class="px-4 py-2"></th>
                     </tr>
 
@@ -20,8 +21,9 @@
                         <tr>
                             <td class="px-4 py-2">{{ $product->id }}</td>
                             <td class="px-4 py-2">{{ $product->name }}</td>
+                            <td class="px-4 py-2">{{ $product->price }}</td>
                             <td class="px-4 py-2">
-                                <a href="{{-- {{ route('dashboard.products.edit', $product->id) }} --}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2">
+                                <a href="{{ route('dashboard.shop.edit', $product->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2">
                                     Bewerk
                                 </a>
                             </td>

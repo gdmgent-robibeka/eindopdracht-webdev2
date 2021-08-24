@@ -45,6 +45,12 @@ Route::middleware(['auth'])->group(function() {
 
         Route::prefix('/shop')->name('.shop')->group(function() {
             Route::get('/', [DashboardShopController::class, 'index']);
+
+            Route::get('/edit/{product}', [DashboardShopController::class, 'edit'])->name('.edit');
+            Route::post('/edit/{product}', [DashboardShopController::class, 'postEdit'])->name('.edit');
+
+            Route::get('/edit/{product}/{language}', [DashboardShopController::class, 'editContent'])->name('.editContent');
+            Route::post('/edit/{product}/{language}', [DashboardShopController::class, 'postEditContent'])->name('.editContent');
         });
     });
 });
